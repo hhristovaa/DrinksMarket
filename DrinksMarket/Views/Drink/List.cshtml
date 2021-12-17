@@ -1,0 +1,11 @@
+﻿@model DrinksListViewModel;
+
+<h1 class="text-center text-secondary font-weight-bold">  @Model.CurrentCategory  </h1>
+<div class="row mt-1 justify-content-center">
+    @foreach (var drink in Model.Drinks)
+    {
+
+        <partial name="_DrinkCard" model="drink" />
+
+    }
+    </div>
