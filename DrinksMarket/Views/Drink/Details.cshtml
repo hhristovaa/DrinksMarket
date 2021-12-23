@@ -1,6 +1,7 @@
 ﻿@model Drink;
 
-<h1  class="text-center text-secondary font-weight-bold">
+
+<h1 class="text-center text-secondary font-weight-bold">
     @Model.Name
 </h1>
 <div class="card text-center flex-row align-items-center">
@@ -9,7 +10,7 @@
     <div class="card-body pl-5 pr-5" style="padding: 3rem">
         <h4 class="text-info">@Model.ShortDescription</h4>
         <p>@Model.LongDescription</p>
-
+  
         <p>@Model.Price.ToString("c")</p>
         <a class="btn btn-info"
            asp-controller="ShoppingCart"

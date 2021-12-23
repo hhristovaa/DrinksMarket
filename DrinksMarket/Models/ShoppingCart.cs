@@ -56,6 +56,8 @@ namespace DrinksMarket.Models
             else
             {
                 shoppingCartItem.Amount++;
+              
+
             }
             _appDbContext.SaveChanges();
         }
@@ -88,11 +90,13 @@ namespace DrinksMarket.Models
 
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
-            return ShoppingCartItems ??
-                   (ShoppingCartItems =
-                       _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+            var shoppingCart = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
                            .Include(s => s.Drink)
-                           .ToList());
+                           .ToList();
+
+
+            return ShoppingCartItems ??
+                   (ShoppingCartItems = shoppingCart);
         }
 
         public void ClearCart()
@@ -106,12 +110,14 @@ namespace DrinksMarket.Models
             _appDbContext.SaveChanges();
         }
 
+        //total price 
         public decimal GetShoppingCartTotal()
         {
             var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
                 .Select(c => c.Drink.Price * c.Amount).Sum();
             return total;
         }
+
     }
 
 }
